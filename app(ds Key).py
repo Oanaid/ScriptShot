@@ -256,7 +256,7 @@ def call_llm(script_text, style, mode, api_key, provider):
         client = anthropic.Anthropic(api_key=api_key)
         message = client.messages.create(
             model="claude-sonnet-4-20250514",
-            max_tokens=8000,
+            max_tokens=16000,
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_msg}],
         )
@@ -275,7 +275,7 @@ def call_llm(script_text, style, mode, api_key, provider):
 
         response = client.chat.completions.create(
             model=model,
-            max_tokens=8000,
+            max_tokens=16000,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_msg},
@@ -284,7 +284,15 @@ def call_llm(script_text, style, mode, api_key, provider):
         )
         raw = response.choices[0].message.content
 
-    return parse_json_response(raw)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        # JSON 被截断时，尝试补全：砍到最后一个完整的 } 并闭合数组和对象
+        last_complete = raw.rfind('},')
+        if last_complete != -1:
+            raw = raw[:last_complete + 1] + ']}]}'
+            return json.loads(raw)
+        raise
 
 
 def generate_html_export(result, style):
