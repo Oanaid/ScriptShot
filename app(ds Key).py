@@ -65,6 +65,14 @@ div[data-testid="stDataFrame"] table {
 .stAlert {
     border-radius: 8px;
 }
+[data-testid="stFileUploader"] button {
+    visibility: hidden;
+}
+[data-testid="stFileUploader"] button::after {
+    content: "点击上传文件";
+    visibility: visible;
+    display: block;
+}
 </style>
 """, unsafe_allow_html=True)
 
