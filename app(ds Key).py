@@ -65,10 +65,10 @@ div[data-testid="stDataFrame"] table {
 .stAlert {
     border-radius: 8px;
 }
-[data-testid="stFileUploaderDropzone"] button[kind="secondary"] {
+[data-testid="stFileUploaderDropzone"] button {
     font-size: 0 !important;
 }
-[data-testid="stFileUploaderDropzone"] button[kind="secondary"]::after {
+[data-testid="stFileUploaderDropzone"] button::after {
     content: "选择文件";
     font-size: 0.875rem;
 }
