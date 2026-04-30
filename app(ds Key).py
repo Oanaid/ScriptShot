@@ -65,13 +65,12 @@ div[data-testid="stDataFrame"] table {
 .stAlert {
     border-radius: 8px;
 }
-[data-testid="stFileUploader"] button {
-    visibility: hidden;
+[data-testid="stFileUploaderDropzone"] button[kind="secondary"] {
+    font-size: 0 !important;
 }
-[data-testid="stFileUploader"] button::after {
-    content: "点击上传文件";
-    visibility: visible;
-    display: block;
+[data-testid="stFileUploaderDropzone"] button[kind="secondary"]::after {
+    content: "选择文件";
+    font-size: 0.875rem;
 }
 </style>
 """, unsafe_allow_html=True)
